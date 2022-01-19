@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editTextActivitiesMain;
     Button buttonOpenActivitiesMain;
     public static final String KEY_MESSAGE = "messageKey_1";
+    public static final String KEY_MESSAGE2 = "messageKey_2";
 
 
     @Override
@@ -28,11 +29,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String messageActivitiesMain = "Hello there, " + editTextActivitiesMain.getText();
+                // запихиваем сообщение в Bundle
                 intentLaunch.putExtra(KEY_MESSAGE, messageActivitiesMain);
                  startActivity(intentLaunch);
             }
         });
 
+        Intent getAnswerSecondActivity = getIntent();
+        Bundle extraz = getAnswerSecondActivity.getExtras();
+        if (extraz != null){
+            String answerMessage = extraz.getString(KEY_MESSAGE);
+        editTextActivitiesMain.setText(answerMessage);
+        }
 
     }
 }
