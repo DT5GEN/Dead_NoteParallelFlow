@@ -33,12 +33,17 @@ public class SecondActivity extends AppCompatActivity {
                 String messageActivitiesSecond = "Hello again, " + editTextActivitiesSecond.getText();
                 // запихиваем сообщение в Bundle
                 intentLaunchSecond.putExtra(MainActivity.KEY_MESSAGE, messageActivitiesSecond);
-                startActivity(intentLaunchSecond);
+               // startActivity(intentLaunchSecond);
+                setResult(RESULT_OK, intentLaunchSecond); // поместили результат при OK запихнули мессадж
+                finish();
             }
         });
 
         if (extrasMainActivity != null) { //если бандл не пустой
-            String messageExtras = extrasMainActivity.getString(MainActivity.KEY_MESSAGE);
+           // String messageExtras = extrasMainActivity.getString(MainActivity.KEY_MESSAGE);
+            Message messageObjSec = (Message) extrasMainActivity.getParcelable(MainActivity.KEY_MESSAGE);
+            String messageExtras = messageObjSec.getSmsMessage();
+
             editTextActivitiesSecond.setText(messageExtras);
 
         } else {

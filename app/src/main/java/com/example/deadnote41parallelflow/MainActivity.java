@@ -1,5 +1,6 @@
 package com.example.deadnote41parallelflow;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonOpenActivitiesMain;
     public static final String KEY_MESSAGE = "messageKey_1";
     public static final String KEY_MESSAGE2 = "messageKey_2";
+    public static final int REQUEST_CODE = 1;
 
 
     @Override
@@ -29,9 +31,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String messageActivitiesMain = "Hello there, " + editTextActivitiesMain.getText();
+                Message messageObj = new Message();
+                messageObj.setSmsMessage(messageActivitiesMain);
                 // запихиваем сообщение в Bundle
-                intentLaunch.putExtra(KEY_MESSAGE, messageActivitiesMain);
-                 startActivity(intentLaunch);
+                intentLaunch.putExtra(KEY_MESSAGE, messageObj);
+              //   startActivity(intentLaunch);
+                startActivityForResult(intentLaunch, REQUEST_CODE);
             }
         });
 
@@ -42,5 +47,16 @@ public class MainActivity extends AppCompatActivity {
         editTextActivitiesMain.setText(answerMessage);
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK)
+        if (requestCode == REQUEST_CODE){
+            String answerMessageAOR = data.getExtras().getString(KEY_MESSAGE);
+            editTextActivitiesMain.setText(" " + answerMessageAOR);
+        }
     }
 }
