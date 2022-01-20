@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra(Intent.EXTRA_SUBJECT, "subject");
                 i.putExtra(Intent.EXTRA_TEXT, "text text text ");
               //  i.setData(Uri.parse("mailto:"));
-                startActivity(i);
+                startActivity(Intent.createChooser(i, "Nice heading"));
             }
 
         });

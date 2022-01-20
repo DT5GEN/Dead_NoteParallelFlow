@@ -37,7 +37,7 @@ public class InterceptActivity extends AppCompatActivity {
                 String subjectFromMain = extrasMainActivity.getString(Intent.EXTRA_SUBJECT);
                 String textFromMain = extrasMainActivity.getString(Intent.EXTRA_TEXT);
 
-                editTextActivitiesIntercept.setText(String.format("%s %s", subjectFromMain, textFromMain));
+                editTextActivitiesIntercept.setText(String.format("%s ", textFromMain));
 
             }
         }
