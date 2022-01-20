@@ -1,5 +1,10 @@
 package com.example.deadnote41parallelflow;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +19,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private  String TAG = "Happy LOG - ";
+    private String TAG = "Happy LOG - ";
     EditText editTextActivitiesMain;
     Button buttonOpenActivitiesMain;
     public static final String KEY_MESSAGE = "messageKey_1";
@@ -28,34 +33,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        /*
         final Intent intentLaunch = new Intent(MainActivity.this, SecondActivity.class);
 
         editTextActivitiesMain = findViewById(R.id.activity_main__first_edit_text);
         buttonOpenActivitiesMain = findViewById(R.id.activity_main__button_open);
+
+        ActivityResultLauncher replacementStartActivityResultDeprecatedMethod = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+
+                        String answerMessageAOR = result.getData().getExtras().getString(KEY_MESSAGE);
+                        editTextActivitiesMain.setText(" " + answerMessageAOR);
+
+                    }
+                }
+        );
+
         buttonOpenActivitiesMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, SecondActivity.class);
                 String messageActivitiesMain = "Hello there, " + editTextActivitiesMain.getText();
                 Message messageObj = new Message();
                 messageObj.setSmsMessage(messageActivitiesMain);
                 // запихиваем сообщение в Bundle
                 intentLaunch.putExtra(KEY_MESSAGE, messageObj);
-              //   startActivity(intentLaunch);
+                //   startActivity(intentLaunch);
                 startActivityForResult(intentLaunch, REQUEST_CODE);
+                replacementStartActivityResultDeprecatedMethod.launch(i);
             }
         });
 
         Intent getAnswerSecondActivity = getIntent();
         Bundle extraz = getAnswerSecondActivity.getExtras();
-        if (extraz != null){
+        if (extraz != null) {
             String answerMessage = extraz.getString(KEY_MESSAGE);
-        editTextActivitiesMain.setText(answerMessage);
+            editTextActivitiesMain.setText(answerMessage);
 
         }
-*/
 
+/*
         Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("txt"));
         Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("jpg"));
         Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("bmp"));
@@ -79,18 +98,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(i, "Nice heading"));
             }
 
-        });
+        }); */
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK)
-        if (requestCode == REQUEST_CODE){
-            String answerMessageAOR = data.getExtras().getString(KEY_MESSAGE);
-            editTextActivitiesMain.setText(" " + answerMessageAOR);
-        }
+            if (requestCode == REQUEST_CODE) {
+
+            }
     }
 }
