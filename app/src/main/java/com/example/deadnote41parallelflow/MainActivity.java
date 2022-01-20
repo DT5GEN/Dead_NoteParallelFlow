@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 // запихиваем сообщение в Bundle
                 intentLaunch.putExtra(KEY_MESSAGE, messageObj);
                 //   startActivity(intentLaunch);
-                startActivityForResult(intentLaunch, REQUEST_CODE);
-                replacementStartActivityResultDeprecatedMethod.launch(i);
+              //  startActivityForResult(intentLaunch, REQUEST_CODE);
+                replacementStartActivityResultDeprecatedMethod.launch(intentLaunch);
             }
         });
 
