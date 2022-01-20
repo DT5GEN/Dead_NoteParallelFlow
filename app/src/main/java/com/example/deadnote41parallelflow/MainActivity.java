@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        /*
         final Intent intentLaunch = new Intent(MainActivity.this, SecondActivity.class);
 
         editTextActivitiesMain = findViewById(R.id.activity_main__first_edit_text);
@@ -45,9 +49,24 @@ public class MainActivity extends AppCompatActivity {
         if (extraz != null){
             String answerMessage = extraz.getString(KEY_MESSAGE);
         editTextActivitiesMain.setText(answerMessage);
-        }
 
+        }
+*/
+
+        editTextActivitiesMain = findViewById(R.id.activity_main__first_edit_text);
+        buttonOpenActivitiesMain = findViewById(R.id.activity_main__button_open);
+        buttonOpenActivitiesMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(Intent.ACTION_SENDTO);
+                i.setData(Uri.parse("mailto:"));
+                startActivity(i);
+            }
+
+        });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {

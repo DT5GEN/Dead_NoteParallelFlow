@@ -49,5 +49,6 @@ public class SecondActivity extends AppCompatActivity {
         } else {
             editTextActivitiesSecond.setText("Error");
         }
+
     }
 }
