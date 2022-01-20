@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    private  String TAG = "Happy LOG - ";
     EditText editTextActivitiesMain;
     Button buttonOpenActivitiesMain;
     public static final String KEY_MESSAGE = "messageKey_1";
@@ -53,14 +56,26 @@ public class MainActivity extends AppCompatActivity {
         }
 */
 
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("txt"));
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("jpg"));
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("bmp"));
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("tif"));
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("mp3"));
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("webp"));
+        Log.d(TAG, MimeTypeMap.getSingleton().getMimeTypeFromExtension("svg"));
+
+
         editTextActivitiesMain = findViewById(R.id.activity_main__first_edit_text);
         buttonOpenActivitiesMain = findViewById(R.id.activity_main__button_open);
         buttonOpenActivitiesMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(Intent.ACTION_SENDTO);
-                i.setData(Uri.parse("mailto:"));
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "subject");
+                i.putExtra(Intent.EXTRA_TEXT, "text text text ");
+              //  i.setData(Uri.parse("mailto:"));
                 startActivity(i);
             }
 

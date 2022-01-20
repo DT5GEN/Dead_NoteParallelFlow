@@ -25,30 +25,40 @@ public class SecondActivity extends AppCompatActivity {
         Intent intentSecondActivities = getIntent();
         Bundle extrasMainActivity = intentSecondActivities.getExtras();
 
+        String subjectFromMain = extrasMainActivity.getString(Intent.EXTRA_SUBJECT);
+        String textFromMain = extrasMainActivity.getString(Intent.EXTRA_TEXT);
 
-        buttonAnswerActivitiesSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentLaunchSecond = new Intent(SecondActivity.this, MainActivity.class);
-                String messageActivitiesSecond = "Hello again, " + editTextActivitiesSecond.getText();
-                // запихиваем сообщение в Bundle
-                intentLaunchSecond.putExtra(MainActivity.KEY_MESSAGE, messageActivitiesSecond);
-               // startActivity(intentLaunchSecond);
-                setResult(RESULT_OK, intentLaunchSecond); // поместили результат при OK запихнули мессадж
-                finish();
-            }
-        });
+        editTextActivitiesSecond.setText(String.format("%s %s", subjectFromMain, textFromMain));
 
-        if (extrasMainActivity != null) { //если бандл не пустой
-           // String messageExtras = extrasMainActivity.getString(MainActivity.KEY_MESSAGE);
-            Message messageObjSec = (Message) extrasMainActivity.getParcelable(MainActivity.KEY_MESSAGE);
-            String messageExtras = messageObjSec.getSmsMessage();
 
-            editTextActivitiesSecond.setText(messageExtras);
 
-        } else {
-            editTextActivitiesSecond.setText("Error");
-        }
+//       buttonAnswerActivitiesSecond.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentLaunchSecond = new Intent(SecondActivity.this, MainActivity.class);
+//                String messageActivitiesSecond = "Hello again, " + editTextActivitiesSecond.getText();
+//                // запихиваем сообщение в Bundle
+//                intentLaunchSecond.putExtra(MainActivity.KEY_MESSAGE, messageActivitiesSecond);
+//               // startActivity(intentLaunchSecond);
+//                setResult(RESULT_OK, intentLaunchSecond); // поместили результат при OK запихнули мессадж
+//                finish();
+//            }
+//        });
+//
+//        if (extrasMainActivity != null) { //если бандл не пустой
+//           // String messageExtras = extrasMainActivity.getString(MainActivity.KEY_MESSAGE);
+//            Message messageObjSec = (Message) extrasMainActivity.getParcelable(MainActivity.KEY_MESSAGE);
+//            String messageExtras = messageObjSec.getSmsMessage();
+//
+//            editTextActivitiesSecond.setText(messageExtras);
+//
+//        } else {
+//            editTextActivitiesSecond.setText("Error");
+//        }
+
+
+
+
 
     }
 }
